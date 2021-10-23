@@ -9,15 +9,29 @@ import re
 
 # Create your views here.
 
-def dantebot(request: WSGIRequest):
+def canto_index(request: WSGIRequest):
+    template = loader.get_template('bots/canto_index.html')
+    context = {
+        'title': 'INFERNO',
+        'number_list': range(1,33+1),
+    }
 
-    with open('bots/content/dantebot/canto_1_en.md', 'r') as f:
+    return HttpResponse(template.render(context, request))
+
+def dantebot(request: WSGIRequest, canto: int = 1):
+
+    path = 'bots/content/dantebot'
+    english_file = f'{path}/canto_{canto}_en.md'
+    italian_file = f'{path}/canto_{canto}_it.md'
+    footnotes_file = f'{path}/canto_{canto}_en_footnotes.md'
+
+    with open(english_file, 'r') as f:
         english = f.read()
 
-    with open('bots/content/dantebot/canto_1_it.md', 'r') as f:
+    with open(italian_file, 'r') as f:
         italian = f.read()
 
-    with open('bots/content/dantebot/canto_1_en_footnotes.md', 'r') as f:
+    with open(footnotes_file, 'r') as f:
         footnotes = f.read()
 
     marked_up_footnotes = f'''{english}
