@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bots/style.css' %}">
+
+<h1>{{ title }}</h1>
+
+{% autoescape off %}
+<table>
+    <tr>
+    <td>
+        {{english}}
+    </td>
+    <td>
+        {{italian}}
+    </td>
+    </tr>
+</table>
+{{footnotes}}
+
+<hr>
+
+{% if preceding %}
+Previous: <a href='../{{ preceding }}'>Canto {{ preceding }}</a>
+{% endif %}
+{% if proceeding %}
+Next: <a href='../{{ proceeding }}'>Canto {{ proceeding }}</a>
+{% endif %}
+
+{% endautoescape %}

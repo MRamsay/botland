@@ -8,12 +8,14 @@ from markdown import markdown
 import re
 
 # Create your views here.
+NUMBER_OF_CANTOS: int = 34
 
 def canto_index(request: WSGIRequest):
+
     template = loader.get_template('bots/canto_index.html')
     context = {
-        'title': 'INFERNO',
-        'number_list': range(1,33+1),
+        'title': 'DANTE\'S INFERNO',
+        'number_list': range(1,NUMBER_OF_CANTOS+1),
     }
 
     return HttpResponse(template.render(context, request))
@@ -34,40 +36,31 @@ def dantebot(request: WSGIRequest, canto: int = 1):
     with open(footnotes_file, 'r') as f:
         footnotes = f.read()
 
-    marked_up_footnotes = f'''{english}
-{footnotes}    
-'''
+    # Preprocessing
+    english = re.sub('\[(\d*)\]', '[^\g<1>]', english)
+    english = re.sub('\n\s\s(\S)', r'\n\n\g<1>', english) # Every triplet starts without indenting, use this to add whitespace
+    footnotes = re.sub('\[(\d*)\]', '[^\g<1>]:', footnotes)
 
+    marked_up_footnotes = f'{english}\n{footnotes}'
+
+    # Link footnotes to English
     marked_up_footnotes = markdown(marked_up_footnotes, extensions=['footnotes'])
-
-    splits = re.split(r'(<div class="footnote")', marked_up_footnotes)
+    splits = re.split(r'(?=<div class="footnote")', marked_up_footnotes)
     english = splits[0]
-    footnotes = ''.join(splits[1:3])
+    footnotes = ''.join(splits[1])
 
     italian = markdown(italian)
     italian = re.sub('\n', '</br>', italian)
     english = re.sub('\n', '</br>', english)
 
-    md_template = f'''
-<table>
-<tr>
-<td>
-{english}
-</td>
-<td>
-{italian}
-</td>
-</table>
-
-{footnotes}
-'''
-
-    # md_template = markdown(md_template, extensions=['footnotes', 'md_in_html']) # conversion to HTML
-
-    template = loader.get_template('bots/test.html')
+    template = loader.get_template('bots/canto.html')
     context = {
-        'title': 'CANTO 1',
-        'content': md_template,
+        'title': f'CANTO {canto}',
+        'english': english,
+        'italian': italian,
+        'footnotes': footnotes,
+        'preceding': canto - 1 if canto - 1 > 0 else False,
+        'proceeding': canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
     }
 
     return HttpResponse(template.render(context, request))
