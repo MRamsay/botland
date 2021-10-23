@@ -79,3 +79,7 @@ img, video{
 	margin-bottom: 20px;
 	display: block;
 }
+
+table td, table td * {
+    vertical-align: top;
+}

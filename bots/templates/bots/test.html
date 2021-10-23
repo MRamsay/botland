@@ -1,6 +1,8 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'bots/style.css' %}">
 
-<!-- {% autoescape off %} -->
+<h1>{{ title }}</h1>
+
+{% autoescape off %}
 {{ content }}
-<!-- {% endautoescape %} -->
+{% endautoescape %}
