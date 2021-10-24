@@ -3,6 +3,21 @@
 
 <h1>{{ title }}</h1>
 
+<a href='..'>Return to Index</a>
+
+<p>
+{% if preceding > 0 %}
+Previous: <a href='../{{ preceding }}'>Canto {{ preceding }}</a>
+{% elif preceding == 0 %}
+Previous: <a href='../{{ preceding }}'>Introduction and Background</a>
+{% endif %}
+{% if proceeding %}
+Next: <a href='../{{ proceeding }}'>Canto {{ proceeding }}</a>
+{% endif %}
+</p>
+
+<hr>
+
 {% autoescape off %}
 <table>
     <tr>

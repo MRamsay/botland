@@ -55,11 +55,11 @@ def dantebot(request: WSGIRequest, canto: int = 1):
 
     template = loader.get_template('bots/canto.html')
     context = {
-        'title': f'CANTO {canto}',
+        'title': f'CANTO {canto}' if canto != 0 else 'INTRODUCTION',
         'english': english,
         'italian': italian,
         'footnotes': footnotes,
-        'preceding': canto - 1 if canto - 1 > 0 else False,
+        'preceding': canto - 1, # canto 0 is the intro
         'proceeding': canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
     }
 
