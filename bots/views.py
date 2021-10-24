@@ -10,12 +10,39 @@ import re
 # Create your views here.
 NUMBER_OF_CANTOS: int = 34
 
+ROMAN = [
+    (1000, "M"),
+    ( 900, "CM"),
+    ( 500, "D"),
+    ( 400, "CD"),
+    ( 100, "C"),
+    (  90, "XC"),
+    (  50, "L"),
+    (  40, "XL"),
+    (  10, "X"),
+    (   9, "IX"),
+    (   5, "V"),
+    (   4, "IV"),
+    (   1, "I"),
+]
+
+def int_to_roman(number):
+    result = []
+    for (arabic, roman) in ROMAN:
+        (factor, number) = divmod(number, arabic)
+        result.append(roman * factor)
+        if number == 0:
+            break
+    return "".join(result)
+
 def canto_index(request: WSGIRequest):
+
+    cantos = range(1,NUMBER_OF_CANTOS+1)
 
     template = loader.get_template('bots/canto_index.html')
     context = {
         'title': 'DANTE\'S INFERNO',
-        'number_list': range(1,NUMBER_OF_CANTOS+1),
+        'number_list': zip(list(cantos), [int_to_roman(c) for c in cantos]),
     }
 
     return HttpResponse(template.render(context, request))
@@ -55,12 +82,14 @@ def dantebot(request: WSGIRequest, canto: int = 1):
 
     template = loader.get_template('bots/canto.html')
     context = {
-        'title': f'CANTO {canto}' if canto != 0 else 'INTRODUCTION',
+        'title': f'CANTO {int_to_roman(canto)}' if canto != 0 else 'INTRODUCTION',
         'english': english,
         'italian': italian,
         'footnotes': footnotes,
         'preceding': canto - 1, # canto 0 is the intro
+        'preceding_roman': int_to_roman(canto - 1) if canto >= 2 else '',
         'proceeding': canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
+        'proceeding_roman': int_to_roman(canto + 1)
     }
 
     return HttpResponse(template.render(context, request))

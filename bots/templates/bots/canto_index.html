@@ -7,7 +7,7 @@
 
 <h3>Cantos</h3>
 <ol>
-    {% for number in number_list %}
-        <li><a href='{{ number }}'>Canto {{ number }}</a></li>
+    {% for number, roman in number_list %}
+        <li><a href='{{ number }}'>Canto {{ roman }}</a></li>
     {% endfor %}
 </ol>

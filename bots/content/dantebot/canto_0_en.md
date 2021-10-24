@@ -1008,34 +1008,34 @@ leaving the fact to stand enveloped in an allegory. At any rate, to his
 gloss upon this passage in his life we are indebted for an interesting
 account of how, at the age of twenty-seven, he put himself to school:--
 
-    'After losing the earliest joy of my life, I was so smitten with
-    sorrow that in nothing could I find any comfort. Yet after some
-    time my mind, eager to recover its tone, since nought that I or
-    others could do availed to restore me, directed itself to find how
-    people, being disconsolate, had been comforted. And so I took to
-    reading that little-known book by Boethius, by writing which he,
-    captive and in exile, had obtained relief. Next, hearing that Tully
-    as well had written a book in which, treating of friendship, he had
-    consoled the worthy Laelius on the occasion of the loss of his
-    friend Scipio, I read that too. And though at the first I found
-    their meaning hard, at last I comprehended it as far as my
-    knowledge of the language and some little command of mother-wit
-    enabled me to do: which same mother-wit had already helped me to
-    much, as may be seen by the _Vita Nuova_. And as it often happens
-    that a man goes seeking silver, and lights on gold he is not
-    looking for--the result of chance, or of some divine provision; so
-    I, besides finding the consolation I was in search of to dry my
-    tears, became possessed of wisdom from authors and sciences and
-    books. Weighing this well, I deemed that philosophy, the mistress
-    of these authors, sciences, and books, must be the best of all
-    things. And imagining her to myself fashioned like a great lady,
-    rich in compassion, my admiration of her was so unbounded that I
-    was always delighting myself in her image. And from thus beholding
-    her in fancy I went on to frequent the places where she is to be
-    found in very deed--in the schools of theology, to wit, and the
-    debates of philosophers. So that in a little time, thirty months or
-    so, I began to taste so much of her sweetness that the love I bore
-    to her effaced or banished every other thought.'[50]
+'After losing the earliest joy of my life, I was so smitten with
+sorrow that in nothing could I find any comfort. Yet after some
+time my mind, eager to recover its tone, since nought that I or
+others could do availed to restore me, directed itself to find how
+people, being disconsolate, had been comforted. And so I took to
+reading that little-known book by Boethius, by writing which he,
+captive and in exile, had obtained relief. Next, hearing that Tully
+as well had written a book in which, treating of friendship, he had
+consoled the worthy Laelius on the occasion of the loss of his
+friend Scipio, I read that too. And though at the first I found
+their meaning hard, at last I comprehended it as far as my
+knowledge of the language and some little command of mother-wit
+enabled me to do: which same mother-wit had already helped me to
+much, as may be seen by the _Vita Nuova_. And as it often happens
+that a man goes seeking silver, and lights on gold he is not
+looking for--the result of chance, or of some divine provision; so
+I, besides finding the consolation I was in search of to dry my
+tears, became possessed of wisdom from authors and sciences and
+books. Weighing this well, I deemed that philosophy, the mistress
+of these authors, sciences, and books, must be the best of all
+things. And imagining her to myself fashioned like a great lady,
+rich in compassion, my admiration of her was so unbounded that I
+was always delighting myself in her image. And from thus beholding
+her in fancy I went on to frequent the places where she is to be
+found in very deed--in the schools of theology, to wit, and the
+debates of philosophers. So that in a little time, thirty months or
+so, I began to taste so much of her sweetness that the love I bore
+to her effaced or banished every other thought.'[50]
 
 No one would guess from this description of how he grew enamoured of
 philosophy, that at the beginning of his arduous studies Dante took a
@@ -2097,22 +2097,22 @@ in the fresco is 1301 or 1302. With regard to when the work was
 executed, Messrs Crowe and Cavalcaselle, in their valuable book, say as
 follows:[147]--
 
-    'All inferences to be deduced from the subject and form of these
-    frescos point to the date of 1301-2. It may be inquired whether
-    they were executed by Giotto at the time, and this inquiry can only
-    be satisfied approximatively. It may be inferred that Dante's
-    portrait would hardly have been introduced into a picture so
-    conspicuously visible as this, had not the poet at the time been
-    influent in Florence.... Dante's age in the fresco corresponds with
-    the date of 1302, and is that of a man of thirty-five. He had
-    himself enjoyed the highest office of Florence from June to August
-    1300.[148] In the fresco he does not wear the dress of the
-    "Priori," but he holds in the ranks of those near Charles of Valois
-    an honourable place. It may be presumed that the frescos were
-    executed previous[149] to Dante's exile, and this view is confirmed
-    by the technical and artistic progress which they reveal. They
-    exhibit, indeed, the master in a higher sphere of development than
-    at Assisi and Rome.'
+'All inferences to be deduced from the subject and form of these
+frescos point to the date of 1301-2. It may be inquired whether
+they were executed by Giotto at the time, and this inquiry can only
+be satisfied approximatively. It may be inferred that Dante's
+portrait would hardly have been introduced into a picture so
+conspicuously visible as this, had not the poet at the time been
+influent in Florence.... Dante's age in the fresco corresponds with
+the date of 1302, and is that of a man of thirty-five. He had
+himself enjoyed the highest office of Florence from June to August
+1300.[148] In the fresco he does not wear the dress of the
+"Priori," but he holds in the ranks of those near Charles of Valois
+an honourable place. It may be presumed that the frescos were
+executed previous[149] to Dante's exile, and this view is confirmed
+by the technical and artistic progress which they reveal. They
+exhibit, indeed, the master in a higher sphere of development than
+at Assisi and Rome.'
 
 This account of the subject of the work and the probable date of its
 execution may, I think, be accepted as containing all that is to be said
