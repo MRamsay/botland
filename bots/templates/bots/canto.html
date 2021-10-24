@@ -42,11 +42,15 @@ Next: <a href='../{{ proceeding }}'>Canto {{ proceeding_roman }}</a>
 
 <hr>
 
-{% if preceding %}
-Previous: <a href='../{{ preceding }}'>Canto {{ preceding }}</a>
-{% endif %}
-{% if proceeding %}
-Next: <a href='../{{ proceeding }}'>Canto {{ proceeding }}</a>
-{% endif %}
+<p>
+    {% if preceding > 0 %}
+    Previous: <a href='../{{ preceding }}'>Canto {{ preceding_roman }}</a>
+    {% elif preceding == 0 %}
+    Previous: <a href='../{{ preceding }}'>Introduction and Background</a>
+    {% endif %}
+    {% if proceeding %}
+    Next: <a href='../{{ proceeding }}'>Canto {{ proceeding_roman }}</a>
+    {% endif %}
+    </p>
 
 {% endautoescape %}
