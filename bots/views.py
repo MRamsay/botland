@@ -87,7 +87,10 @@ def dantebot(request: WSGIRequest, canto: int = 1):
     # NOTE: Every verse triplet starts without indenting
     start_of_english_triplet_re: Pattern = re.compile(r'\n\s\s(\S)')
     an_extra_newline_re = r'\n\n\g<1>'
-    english = re.sub(start_of_english_triplet_re, an_extra_newline_re, english) 
+    english = re.sub(start_of_english_triplet_re, an_extra_newline_re, english)
+
+    line_number_marker_re: Pattern = re.compile('\d{2,3}(\n|$)')
+    english = re.sub(line_number_marker_re, '\n', english)
 
     marked_up_footnotes: str = f'{english}\n{footnotes}'
 
