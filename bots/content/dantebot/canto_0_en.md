@@ -2058,6 +2058,8 @@ close. He died at Ravenna in the month of September 1321.
 
 ## GIOTTO'S PORTRAIT OF DANTE.[142]
 
+![A fresco of Dante by Giotto](/static/Giotto_Dante-alighieri.jpg)
+
 
 Vasari, in his _Lives of the Painters_, tells that in his day the
 portrait of Dante by Giotto was still to be seen in the chapel of the
