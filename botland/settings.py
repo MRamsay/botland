@@ -12,15 +12,15 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+# This is not stored in source control!
+from .secrets import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-freas*30s3$3pad#b+k37(f&!a)mll*pgo1n=o3fgb^0h821(5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'botland',
         'USER': 'neo',
-        'PASSWORD': 'bonk1234',
+        'PASSWORD': DB_PASSWORD, # stored secret
         'HOST': '127.0.0.1',
     }
 }

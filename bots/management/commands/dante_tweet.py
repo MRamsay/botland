@@ -1,49 +1,24 @@
 from django.core.management.base import BaseCommand
 
-from bots.helpers import format_english_canto_for_twitter, unmark, strip_footnotes, readfile
+from bots.helpers import format_english_canto_for_twitter, readfile
+from botland.settings import TWITTER_API_KEY, TWITTER_API_KEY_SECRET, CANTOBOT_OAUTH_TOKEN, CANTOBOT_OAUTH_TOKEN_SECRET
 
 from urllib.parse import parse_qs
-from typing import Dict, List, Text, Pattern, Tuple
+from typing import Dict, List, Text, Tuple
 import tweepy
-import re
 
 # Tweepy login
 
-def get_twitter_credentials() -> Dict:
-    '''
-        Get twitter credentials
-    '''
-    twitter_api_key =           readfile('twitter_api_key')
-    twitter_api_key_secret =    readfile('twitter_api_key_secret')
-    cantobot_credentials =      readfile('cantobot_credentials')
+def tweepy_connect() -> tweepy.API:
 
-    params: Dict = parse_qs(cantobot_credentials)
-
-    # parsed as list of length 1, so do ['my-cool-string'] -> 'my-cool-string'
-    oauth_token, = params['oauth_token']
-    oauth_token_secret, = params['oauth_token_secret']
-
-    return twitter_api_key, twitter_api_key_secret, oauth_token, oauth_token_secret,
-
-
-def get_tweepy_api(twitter_api_key: str, twitter_api_key_secret: str, oauth_token: str, oauth_token_secret: str) -> tweepy.API:
-
-    auth = tweepy.OAuthHandler(twitter_api_key, twitter_api_key_secret)
+    auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_KEY_SECRET)
     # auth = tweepy.OAuthHandler(twitter_api_key, twitter_api_key_secret)
-    auth.set_access_token(oauth_token, oauth_token_secret)
+    auth.set_access_token(CANTOBOT_OAUTH_TOKEN, CANTOBOT_OAUTH_TOKEN_SECRET)
 
     api: tweepy.API = tweepy.API(auth)
 
     # might fail
     api.verify_credentials()
-
-    return api
-
-
-def tweepy_connect() -> tweepy.API:
-
-    credentials: Tuple[str, str, str, str] = get_twitter_credentials()
-    api = get_tweepy_api(*credentials)
 
     return api
 
@@ -94,9 +69,9 @@ class Command(BaseCommand):
 
         api = tweepy_connect()
 
-        in_reply_to_status_id = None
-        for tweet in tweets:
-            ret = api.update_status(tweet, in_reply_to_status_id=in_reply_to_status_id, auto_populate_reply_metadata=True)
-            in_reply_to_status_id = ret.id
+        # in_reply_to_status_id = None
+        # for tweet in tweets:
+        #     ret = api.update_status(tweet, in_reply_to_status_id=in_reply_to_status_id, auto_populate_reply_metadata=True)
+        #     in_reply_to_status_id = ret.id
 
         print(canto)
