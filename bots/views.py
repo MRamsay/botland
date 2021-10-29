@@ -94,8 +94,8 @@ def dantebot(request: WSGIRequest, canto: int = 1):
     an_extra_newline_re = r'\n\n\g<1>'
     english = re.sub(start_of_english_triplet_re, an_extra_newline_re, english)
 
-    line_number_marker_re: Pattern = re.compile('\d{2,3}(\n|$)')
-    english = re.sub(line_number_marker_re, '\n', english)
+    line_number_marker_re: Pattern = re.compile('\s*\d{2,3}(\n|$)')
+    english = re.sub(line_number_marker_re, r'\n', english)
 
     marked_up_footnotes: str = f'{english}\n{footnotes}'
 
@@ -107,6 +107,7 @@ def dantebot(request: WSGIRequest, canto: int = 1):
     english, footnotes = splits
 
     english = re.sub('\n', '</br>', english)
+    english = re.sub('</br>\n</br>', '</br>', english)
 
     template = loader.get_template('bots/canto.html')
     context = {
@@ -117,7 +118,8 @@ def dantebot(request: WSGIRequest, canto: int = 1):
         'preceding': canto - 1, # canto 0 is the intro
         'preceding_roman': RomanNumeral(canto - 1) if canto >= 2 else '',
         'proceeding': canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
-        'proceeding_roman': RomanNumeral(canto + 1)
+        'proceeding_roman': RomanNumeral(canto + 1),
+        'english_only': True,
     }
 
     return HttpResponse(template.render(context, request))

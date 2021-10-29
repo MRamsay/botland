@@ -20,15 +20,25 @@ Next: <a href='../{{ proceeding }}'>Canto {{ proceeding_roman }}</a>
 
 {% autoescape off %}
 {% if proceeding != 1 and not english_only %}
-<table>
-    <tr>
-    <td>
-        {{english}}
-    </td>
-    <td>
-        {{italian}}
-    </td>
-    </tr>
+<table style="width: 100%;">
+
+    <colgroup >
+        <col span="1" style="width: 50%;">
+        <col span="1" style="width: 50%;">
+    </colgroup>
+
+    <tablebody>
+        <tr>
+            <td>
+                {{english}}
+            </td>
+            <td>
+                {{italian}}
+            </td>
+        </tr>
+    </tablebody>
+
+    
 </table>
 {{footnotes}}
 {% else %}
