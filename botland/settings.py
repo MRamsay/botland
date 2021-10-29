@@ -25,12 +25,10 @@ SERVER = socket.getfqdn()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = ['.michaelramsay.com', 'localhost', '127.0.0.1',]
 
-DEBUG = SERVER != 'localhost' and SERVER != '127.0.0.1'
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = SERVER == SERVERNAME
 
 # Application definition
 
