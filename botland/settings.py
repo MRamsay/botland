@@ -28,7 +28,7 @@ SERVER = socket.getfqdn()
 ALLOWED_HOSTS = ['.michaelramsay.com', 'localhost', '127.0.0.1',]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = SERVER == SERVERNAME
+DEBUG = SERVER != SERVERNAME
 
 # Application definition
 
