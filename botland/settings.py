@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.michaelramsay.com', 'localhost']
 
 
 # Application definition
@@ -74,9 +74,11 @@ WSGI_APPLICATION = 'botland.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+ENGINE = 'mysql' if DEBUG else 'postgresql'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': f'django.db.backends.{ENGINE}',
         'NAME': 'botland',
         'USER': 'neo',
         'PASSWORD': DB_PASSWORD, # stored secret
