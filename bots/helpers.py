@@ -35,3 +35,20 @@ def strip_footnotes(text: Text) -> Text:
     english_footnote_re: Pattern = re.compile(r'\[(\d*)\]')
     text = re.sub(english_footnote_re, '', text)
     return text
+
+def format_english_canto_for_twitter(content) -> Text:
+
+    # Add a newline to each verse triplet
+    # NOTE: Every verse triplet starts without indenting
+    start_of_english_triplet_re: Pattern = re.compile(r'\n\s\s(\S)')
+    an_extra_newline_re = r'\n\n\g<1>'
+    content = re.sub(start_of_english_triplet_re, an_extra_newline_re, content)
+
+    line_number_marker_re: Pattern = re.compile('\d{2,3}(\n|$)')
+    content = re.sub(line_number_marker_re, '\n', content)
+
+    content = unmark(strip_footnotes(content))
+    content = re.sub('   ', '', content)
+    content = re.sub('\n ', '\n', content)
+
+    return content

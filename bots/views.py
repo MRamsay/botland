@@ -36,6 +36,11 @@ def int_to_roman(number):
             break
     return "".join(result)
 
+class RomanNumeral(int):
+
+    def __str__(self) -> str:
+        return int_to_roman(self)
+
 def canto_index(request: WSGIRequest):
 
     cantos = range(1,NUMBER_OF_CANTOS+1)
@@ -43,7 +48,7 @@ def canto_index(request: WSGIRequest):
     template = loader.get_template('bots/canto_index.html')
     context = {
         'title': 'DANTE\'S INFERNO',
-        'number_list': zip(list(cantos), [int_to_roman(c) for c in cantos]),
+        'number_list': zip(list(cantos), [RomanNumeral(c) for c in cantos]),
     }
 
     return HttpResponse(template.render(context, request))
@@ -105,14 +110,14 @@ def dantebot(request: WSGIRequest, canto: int = 1):
 
     template = loader.get_template('bots/canto.html')
     context = {
-        'title': f'CANTO {int_to_roman(canto)}' if canto != 0 else 'INTRODUCTION',
+        'title': f'CANTO {RomanNumeral(canto)}' if canto != 0 else 'INTRODUCTION',
         'english': english,
         'italian': italian,
         'footnotes': footnotes,
         'preceding': canto - 1, # canto 0 is the intro
-        'preceding_roman': int_to_roman(canto - 1) if canto >= 2 else '',
+        'preceding_roman': RomanNumeral(canto - 1) if canto >= 2 else '',
         'proceeding': canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
-        'proceeding_roman': int_to_roman(canto + 1)
+        'proceeding_roman': RomanNumeral(canto + 1)
     }
 
     return HttpResponse(template.render(context, request))
