@@ -14,21 +14,31 @@ from pathlib import Path
 import os
 import socket
 
-# This is not stored in source control!
-from .secrets import *
+SERVER = socket.getfqdn()
+
+if os.environ.get('CI', ''):
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    DB_PASSWORD = os.environ.get('DB_PASSWORD')
+
+    SERVERNAME = 'jerry'
+
+    DEBUG = True
+else:
+    # This is not stored in source control!
+    from .secrets import *
+
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = SERVER != SERVERNAME
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SERVER = socket.getfqdn()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 ALLOWED_HOSTS = ['.michaelramsay.com', 'localhost', '127.0.0.1',]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = SERVER != SERVERNAME
 
 # Application definition
 

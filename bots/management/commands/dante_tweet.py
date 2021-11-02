@@ -59,7 +59,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        current_canto = 5
+        current_canto = 9
 
         canto = get_canto(current_canto)
         canto = format_english_canto_for_twitter(canto)
@@ -69,9 +69,9 @@ class Command(BaseCommand):
 
         api = tweepy_connect()
 
-        # in_reply_to_status_id = None
-        # for tweet in tweets:
-        #     ret = api.update_status(tweet, in_reply_to_status_id=in_reply_to_status_id, auto_populate_reply_metadata=True)
-        #     in_reply_to_status_id = ret.id
+        in_reply_to_status_id = None
+        for tweet in tweets:
+            ret = api.update_status(tweet, in_reply_to_status_id=in_reply_to_status_id, auto_populate_reply_metadata=True)
+            in_reply_to_status_id = ret.id
 
         print(canto)
