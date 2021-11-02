@@ -63,7 +63,7 @@ jobs:
 
     - name: Server Refresh
       uses: appleboy/ssh-action@master
-      with:
+      env:
         HOST: ${{ secrets.SSH_HOST }}
         USERNAME: ${{ secrets.SSH_USERNAME }}
         PORT: 22
