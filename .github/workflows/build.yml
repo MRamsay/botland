@@ -62,7 +62,7 @@ jobs:
         target: "./botland"
 
     - name: Server Refresh
-      uses: appleboy/ssh-action
+      uses: appleboy/ssh-action@master
       with:
         HOST: ${{ secrets.SSH_HOST }}
         USERNAME: ${{ secrets.SSH_USERNAME }}
