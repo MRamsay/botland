@@ -13,13 +13,12 @@ jobs:
     strategy:
       matrix:
         python-version: [3.9]
-        db-pass: bonkbonk123
 
     services:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: ${{ db-pass }}
+          MYSQL_ROOT_PASSWORD: bonkbonk123
           MYSQL_DATABASE: mysql
         ports: ['3306:3306']
 
@@ -39,7 +38,7 @@ jobs:
         DBENGINE: django.db.backends.mysql
         DBNAME: mysql
         DBUSER: neo
-        DB_PASSWORD: ${{ db-pass }}
+        DB_PASSWORD: bonkbonk123
         DBHOST: 127.0.0.1
         DBPORT: $
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
