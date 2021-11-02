@@ -21,7 +21,7 @@ jobs:
           MYSQL_USER: neo
           MYSQL_PASSWORD: bonkbonk123
           MYSQL_ROOT_PASSWORD: bonkbonk123
-          MYSQL_DATABASE: mysql
+          MYSQL_DATABASE: botland
         ports: ['3306:3306']
 
     steps:
@@ -38,7 +38,7 @@ jobs:
       run: python manage.py migrate
       env: 
         DBENGINE: django.db.backends.mysql
-        DBNAME: mysql
+        DBNAME: botland
         DBUSER: neo
         DB_PASSWORD: bonkbonk123
         DBHOST: 127.0.0.1
