@@ -18,6 +18,8 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
+          MYSQL_USER: neo
+          MYSQL_PASSWORD: bonkbonk123
           MYSQL_ROOT_PASSWORD: bonkbonk123
           MYSQL_DATABASE: mysql
         ports: ['3306:3306']
