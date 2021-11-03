@@ -70,6 +70,7 @@ jobs:
         KEY: ${{ secrets.SSH_KEY }}
         script: |
           cd botland
+          source botlandenv/bin/activate
           python manage.py migrate
           python manage.py collectstatic --no-input
           sudo service gunicorn restart
