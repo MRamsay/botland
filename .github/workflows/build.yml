@@ -1,4 +1,4 @@
-name: CI Build
+name: Build + Deploy
 
 on:
   push:
@@ -62,10 +62,15 @@ jobs:
         target: "./botland"
 
     - name: Server Refresh
-      uses: actions/checkout@v1
+      uses: appleboy/ssh-action@master
       with:
         HOST: ${{ secrets.SSH_HOST }}
         USERNAME: ${{ secrets.SSH_USERNAME }}
         PORT: 22
         KEY: ${{ secrets.SSH_KEY }}
-        script: ls
+        script: |
+          cd botland
+          source botlandenv/bin/activate
+          python manage.py migrate
+          python manage.py collectstatic --no-input
+          sudo service gunicorn restart
