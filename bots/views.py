@@ -4,6 +4,7 @@ from django.http.response import HttpResponse
 from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import render
 from django.template import loader
+from bots.helpers import RomanNumeral
 
 from markdown import markdown
 import re
@@ -11,39 +12,10 @@ import re
 # Create your views here.
 NUMBER_OF_CANTOS: int = 34
 
-ROMAN = [
-    (1000, "M"),
-    ( 900, "CM"),
-    ( 500, "D"),
-    ( 400, "CD"),
-    ( 100, "C"),
-    (  90, "XC"),
-    (  50, "L"),
-    (  40, "XL"),
-    (  10, "X"),
-    (   9, "IX"),
-    (   5, "V"),
-    (   4, "IV"),
-    (   1, "I"),
-]
-
-def int_to_roman(number):
-    result = []
-    for (arabic, roman) in ROMAN:
-        (factor, number) = divmod(number, arabic)
-        result.append(roman * factor)
-        if number == 0:
-            break
-    return "".join(result)
-
-class RomanNumeral(int):
-
-    def __str__(self) -> str:
-        return int_to_roman(self)
 
 def canto_index(request: WSGIRequest):
 
-    cantos = range(1,NUMBER_OF_CANTOS+1)
+    cantos = range(1, NUMBER_OF_CANTOS + 1)
 
     template = loader.get_template('bots/canto_index.html')
     context = {
@@ -52,6 +24,7 @@ def canto_index(request: WSGIRequest):
     }
 
     return HttpResponse(template.render(context, request))
+
 
 def dantebot(request: WSGIRequest, canto: int = 1):
 
@@ -71,7 +44,6 @@ def dantebot(request: WSGIRequest, canto: int = 1):
     with open(footnotes_file, 'r') as f:
         footnotes: str = f.read()
 
-
     # --- Preprocessing to get text display ready
 
     # Original Italian is easy to preprocess.
@@ -86,7 +58,8 @@ def dantebot(request: WSGIRequest, canto: int = 1):
     english_footnote_re: Pattern = re.compile(r'\[(\d*)\]')
     english_footnote_post_re = r'[^\g<1>]:'
     english = re.sub(english_footnote_re, english_footnote_post_re, english)
-    footnotes = re.sub(english_footnote_re, english_footnote_post_re, footnotes)
+    footnotes = re.sub(english_footnote_re, english_footnote_post_re,
+                       footnotes)
 
     # Add a newline to each verse triplet
     # NOTE: Every verse triplet starts without indenting
@@ -100,9 +73,11 @@ def dantebot(request: WSGIRequest, canto: int = 1):
     marked_up_footnotes: str = f'{english}\n{footnotes}'
 
     # Links footnotes to English as well
-    marked_up_footnotes = markdown(marked_up_footnotes, extensions=['footnotes'])
+    marked_up_footnotes = markdown(marked_up_footnotes,
+                                   extensions=['footnotes'])
 
-    english_footnote_splitpoint: Pattern = re.compile(r'(?=<div class="footnote")')
+    english_footnote_splitpoint: Pattern = re.compile(
+        r'(?=<div class="footnote")')
     splits = re.split(english_footnote_splitpoint, marked_up_footnotes)
     english, footnotes = splits
 
@@ -111,11 +86,12 @@ def dantebot(request: WSGIRequest, canto: int = 1):
 
     template = loader.get_template('bots/canto.html')
     context = {
-        'title': f'CANTO {RomanNumeral(canto)}' if canto != 0 else 'INTRODUCTION',
+        'title':
+        f'CANTO {RomanNumeral(canto)}' if canto != 0 else 'INTRODUCTION',
         'english': english,
         'italian': italian,
         'footnotes': footnotes,
-        'preceding': canto - 1, # canto 0 is the intro
+        'preceding': canto - 1,  # canto 0 is the intro
         'preceding_roman': RomanNumeral(canto - 1) if canto >= 2 else '',
         'proceeding': canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
         'proceeding_roman': RomanNumeral(canto + 1),
