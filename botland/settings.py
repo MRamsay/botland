@@ -20,7 +20,7 @@ if os.environ.get('CI', ''):
     SECRET_KEY = os.environ.get('SECRET_KEY')
     DB_PASSWORD = os.environ.get('DB_PASSWORD')
 
-    SERVERNAME = 'jerry'
+    SERVERNAME = os.environ.get('SERVER_NAME')
 
     DEBUG = True
 else:
@@ -37,7 +37,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-ALLOWED_HOSTS = ['.michaelramsay.com', 'localhost', '127.0.0.1',]
+ALLOWED_HOSTS = ['.michaelramsay.com', 'localhost', '127.0.0.1', '108.61.202.121']
 
 
 # Application definition
@@ -86,11 +86,9 @@ WSGI_APPLICATION = 'botland.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-ENGINE = 'mysql' if DEBUG else 'postgresql'
-
 DATABASES = {
     'default': {
-        'ENGINE': f'django.db.backends.{ENGINE}',
+        'ENGINE': f'django.db.backends.mysql',
         'NAME': 'botland',
         'USER': 'neo',
         'PASSWORD': DB_PASSWORD, # stored secret
