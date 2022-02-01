@@ -4,7 +4,7 @@ from bots.twitter import post_canto
 
 
 class DanteTweet(CronJobBase):
-    RUN_AT_TIMES = ['14:00': '22:00']
+    RUN_AT_TIMES = ['14:00', '22:00']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'bots.dante_tweet'  # a unique code
