@@ -4,9 +4,9 @@ from bots.twitter import post_canto
 
 
 class DanteTweet(CronJobBase):
-    RUN_EVERY_MINS = 60 * 24  # Once Daily
+    RUN_AT_TIMES = ['14:00': '22:00']
 
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'bots.dante_tweet'  # a unique code
 
     def do(self):
