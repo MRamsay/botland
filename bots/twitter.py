@@ -82,7 +82,7 @@ def send_tweet_thread(number: int, tweets: List[Text], is_fake=False):
     api = tweepy_connect(is_fake)
 
     tweets = [
-        f'Dante\'s Inferno: Canto {RomanNumeral(number)}\n#poetry #dante #hell'
+        f'Dante\'s Inferno: Canto {RomanNumeral(number)}\n#Poetry #Dante #hell'
     ] + tweets
 
     in_reply_to_status_id = None

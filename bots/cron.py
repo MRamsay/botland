@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from django_cron import CronJobBase, Schedule
 from bots.models import TweetRecord
 from bots.twitter import post_canto
@@ -12,6 +14,6 @@ class DanteTweet(CronJobBase):
     def do(self):
         try:
             rec: TweetRecord = TweetRecord.create_next()
-            post_canto(rec.series)
+            post_canto(rec.series, is_fake=settings.DEBUG)
         except Exception as e:
             print(str(e))

@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 import socket
 
-SERVER = socket.getfqdn()
+SERVER = socket.getfqdn().lower()
 
 if os.environ.get('CI', ''):
     SECRET_KEY = os.environ.get('SECRET_KEY')
