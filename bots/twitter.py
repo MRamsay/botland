@@ -35,16 +35,16 @@ def tweepy_connect(is_fake: bool) -> tweepy.API:
     return api
 
 
-def get_canto(canto: int = 1) -> Text:
+def get_canto(canto: int = 1, language: Text = 'en') -> Text:
 
     if canto > 34 or canto < 1:
         raise ValueError('Invalid canto detected')
 
     path = 'bots/content/dantebot'
-    english_file = f'{path}/canto_{canto}_en.md'
-    english: Text = readfile(english_file)
+    filepath = f'{path}/canto_{canto}_{language}.md'
+    text: Text = readfile(filepath)
 
-    return english
+    return text
 
 
 def chunk_for_twitter(content: str) -> List[str]:
@@ -68,11 +68,21 @@ def chunk_for_twitter(content: str) -> List[str]:
     return tweets
 
 
-def assemble_tweets(number: int) -> List[Text]:
+def assemble_tweets(number: int, language) -> List[Text]:
 
-    canto = get_canto(number)
-    canto = format_english_canto_for_twitter(canto)
+    canto = get_canto(number, language)
+    if language == 'en':
+        canto = format_english_canto_for_twitter(canto)
     tweets = chunk_for_twitter(canto)
+
+    header = ''
+
+    if language == 'en':
+        header = f'DANTE\'S INFERNO: CANTO {RomanNumeral(number)}\n#Poetry #Dante #Inferno'
+    elif language == 'it':
+        header = f'LA DIVINA COMMEDIA: INFERNO, CANTO {RomanNumeral(number)}\n#Poesia #Poetry #Dante #Inferno'
+
+    tweets = [header] + tweets
 
     return tweets
 
@@ -80,10 +90,6 @@ def assemble_tweets(number: int) -> List[Text]:
 def send_tweet_thread(number: int, tweets: List[Text], is_fake=False):
 
     api = tweepy_connect(is_fake)
-
-    tweets = [
-        f'Dante\'s Inferno: Canto {RomanNumeral(number)}\n#Poetry #Dante #hell'
-    ] + tweets
 
     in_reply_to_status_id = None
     for idx, tweet in enumerate(tweets):
@@ -100,6 +106,6 @@ def send_tweet_thread(number: int, tweets: List[Text], is_fake=False):
         in_reply_to_status_id = ret.id
 
 
-def post_canto(number: int, is_fake=True):
-    tweets = assemble_tweets(number)
+def post_canto(number: int, is_fake=True, language='en'):
+    tweets = assemble_tweets(number, language)
     send_tweet_thread(number, tweets, is_fake=is_fake)
