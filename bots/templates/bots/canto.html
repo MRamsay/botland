@@ -3,23 +3,12 @@
 
 <h1>{{ title }}</h1>
 
-<a href='..'>Return to Index</a>
-
-<p>
-{% if preceding > 0 %}
-Previous: <a href='../{{ preceding }}'>Canto {{ preceding_roman }}</a>
-{% elif preceding == 0 %}
-Previous: <a href='../{{ preceding }}'>Introduction and Background</a>
-{% endif %}
-{% if proceeding %}
-Next: <a href='../{{ proceeding }}'>Canto {{ proceeding_roman }}</a>
-{% endif %}
-</p>
+{% include "./canto_header_links.html" %}
 
 <hr>
 
 {% autoescape off %}
-{% if proceeding != 1 and not english_only %}
+{% if proceeding != 1 %}
 <table style="width: 100%;">
 
     <colgroup >
@@ -28,38 +17,35 @@ Next: <a href='../{{ proceeding }}'>Canto {{ proceeding_roman }}</a>
     </colgroup>
 
     <tablebody>
+        {% for line in lines %}
+        {% if forloop.counter0|divisibleby:3 %}
+        <tr style="height:36px;">
+            <td></td>
+            <td></td>
+        </tr>    
+        {% endif %}
         <tr>
             <td>
-                {{english}}
+                {{line.italian}}
             </td>
             <td>
-                {{italian}}
+                {{line.english}}
             </td>
         </tr>
+        {% endfor %}
     </tablebody>
 
 </table>
-{{footnotes}}
 {% else %}
-
-{{english}}
-
-{{footnotes}}
-
+    {% for line in lines %}
+        {{line.english}}
+    {% endfor %}
 {% endif %}
+{{footnotes}}
 
 
 <hr>
 
-<p>
-    {% if preceding > 0 %}
-    Previous: <a href='../{{ preceding }}'>Canto {{ preceding_roman }}</a>
-    {% elif preceding == 0 %}
-    Previous: <a href='../{{ preceding }}'>Introduction and Background</a>
-    {% endif %}
-    {% if proceeding %}
-    Next: <a href='../{{ proceeding }}'>Canto {{ proceeding_roman }}</a>
-    {% endif %}
-    </p>
+{% include "./canto_footer_links.html" %}
 
 {% endautoescape %}

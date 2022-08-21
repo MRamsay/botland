@@ -1,8 +1,6 @@
 from typing import Pattern
-from django import template
 from django.http.response import HttpResponse
 from django.core.handlers.wsgi import WSGIRequest
-from django.shortcuts import render
 from django.template import loader
 from bots.helpers import RomanNumeral
 
@@ -48,7 +46,7 @@ def dantebot(request: WSGIRequest, canto: int = 1):
 
     # Original Italian is easy to preprocess.
     italian = markdown(italian)
-    italian = re.sub('\n', '</br>', italian)
+    # italian = re.sub('\n', '</br>', italian)
 
     # English translation w/ footnotes needs more work
 
@@ -63,9 +61,9 @@ def dantebot(request: WSGIRequest, canto: int = 1):
 
     # Add a newline to each verse triplet
     # NOTE: Every verse triplet starts without indenting
-    start_of_english_triplet_re: Pattern = re.compile(r'\n\s\s(\S)')
-    an_extra_newline_re = r'\n\n\g<1>'
-    english = re.sub(start_of_english_triplet_re, an_extra_newline_re, english)
+    # start_of_english_triplet_re: Pattern = re.compile(r'\n\s\s(\S)')
+    # an_extra_newline_re = r'\n\n\g<1>'
+    # english = re.sub(start_of_english_triplet_re, an_extra_newline_re, english)
 
     line_number_marker_re: Pattern = re.compile('\s*\d{2,3}(\n|$)')
     english = re.sub(line_number_marker_re, r'\n', english)
@@ -81,21 +79,40 @@ def dantebot(request: WSGIRequest, canto: int = 1):
     splits = re.split(english_footnote_splitpoint, marked_up_footnotes)
     english, footnotes = splits
 
-    english = re.sub('\n', '</br>', english)
-    english = re.sub('</br>\n</br>', '</br>', english)
+    # english = re.sub('\n', '</br>', english)
+    # english = re.sub('</br>\n</br>', '</br>', english)
 
-    template = loader.get_template('bots/canto.html')
-    context = {
-        'title':
-        f'CANTO {RomanNumeral(canto)}' if canto != 0 else 'INTRODUCTION',
-        'english': english,
-        'italian': italian,
-        'footnotes': footnotes,
-        'preceding': canto - 1,  # canto 0 is the intro
-        'preceding_roman': RomanNumeral(canto - 1) if canto >= 2 else '',
-        'proceeding': canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
-        'proceeding_roman': RomanNumeral(canto + 1),
-        'english_only': True,
-    }
+    if canto == 0:
+        template = loader.get_template('bots/canto_intro.html')
+        context = {
+            'title': 'INTRODUCTION',
+            'text': english,
+            'footnotes': footnotes,
+            'preceding': canto - 1,  # canto 0 is the intro
+            'preceding_roman': RomanNumeral(canto - 1) if canto >= 2 else '',
+            'proceeding':
+            canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
+            'proceeding_roman': RomanNumeral(canto + 1),
+        }
+    else:
+        template = loader.get_template('bots/canto.html')
+
+        lines = zip(italian.split('\n'), english.split('\n'))
+        lines = [{
+            'italian': line[0],
+            'english': line[1],
+        } for line in zip(italian.split('\n'), english.split('\n'))]
+
+        context = {
+            'title':
+            f'CANTO {RomanNumeral(canto)}' if canto != 0 else 'INTRODUCTION',
+            'lines': lines,
+            'footnotes': footnotes,
+            'preceding': canto - 1,  # canto 0 is the intro
+            'preceding_roman': RomanNumeral(canto - 1) if canto >= 2 else '',
+            'proceeding':
+            canto + 1 if canto + 1 <= NUMBER_OF_CANTOS else False,
+            'proceeding_roman': RomanNumeral(canto + 1),
+        }
 
     return HttpResponse(template.render(context, request))

@@ -3,11 +3,11 @@
 
 <h1>{{ title }}</h1>
 
-<li><a href=0>Introduction and Background</a></li>
+<li><a href="{% url 'inferno_canto' 0 %}">Introduction and Background</a></li>
 
 <h3>Cantos</h3>
 <ol>
     {% for number, roman in number_list %}
-        <li><a href='{{ number }}'>Canto {{ roman }}</a></li>
+        <li><a href="{% url 'inferno_canto' number %}">Canto {{ roman }}</a></li>
     {% endfor %}
 </ol>

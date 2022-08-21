@@ -1,0 +1,12 @@
+<a href="{% url 'inferno_index' %}">Return to Index</a>
+
+<p>
+{% if preceding > 0 %}
+Previous: <a href="{% url 'inferno_canto' preceding %}">Canto {{ preceding_roman }}</a>
+{% elif preceding == 0 %}
+Previous: <a href="{% url 'inferno_canto' preceding %}">Introduction and Background</a>
+{% endif %}
+{% if proceeding %}
+Next: <a href="{% url 'inferno_canto' proceeding %}">Canto {{ proceeding_roman }}</a>
+{% endif %}
+</p>
