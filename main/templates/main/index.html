@@ -1,0 +1,21 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+
+<h1>Michael Ramsay's Website</h1>
+
+<h2>Cool Things</h2>
+
+<h3>Dante's Inferno</h3>
+
+Check out the Italian/English page for <a href="{% url 'inferno_index' %}">Dante's Inferno</a> that I made.
+<br />
+Likewise, you should follow the twitter bot for this,<a href="https://twitter.com/cantobot">@cantobot</a>. Get a canto a day, either in English or Italian, with pictures by William Blake.
+
+<h3>Midwit JWST</h3>
+
+James Webb data navigation is either watered down press releases, or extremely complicated and poorly documented astro data.
+<br />
+Trying to thread the needle with this one.
+<a href="{% url 'jwst_index' %}">See pics here</a>.
+
+
