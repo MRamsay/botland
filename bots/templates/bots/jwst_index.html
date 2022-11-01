@@ -1,0 +1,33 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+
+<h1>Midwit JWST</h1>
+
+{% for proposal in proposals %}
+<h3>{{proposal.proposal_title}}</h3>
+ID: {{proposal.proposal_id}}<br />
+Author: {{proposal.proposal_pi}}<br />
+Keywords: {{proposal.proposal_keywords}}<br />
+Proposal PDF: <a href="https://www.stsci.edu/jwst/phase2-public/{{proposal.proposal_id}}.pdf">https://www.stsci.edu/jwst/phase2-public/{{proposal.proposal_id}}.pdf</a>        
+{% if proposal.observations %}
+<details>
+    <summary>
+        Pointings
+    </summary>
+    <span>
+        {% for obs in proposal.observations %}
+            <h4>Pointing {{ obs.obsid }}</h4>
+            Observation ID string: {{ obs.obs_id }}<br />
+            Target: {{ obs.target_name}}<br />
+            RA/DEC: {{obs.s_ra}}/{{obs.s_dec}}<br />
+
+            Data Download: <a href="https://mast.stsci.edu/api/v0.1/Download/file?uri={{obs.dataURL}}">https://mast.stsci.edu/api/v0.1/Download/file?uri={{obs.dataURL}}</a>
+            <img src="https://mast.stsci.edu/api/v0.1/Download/file?uri={{obs.jpegURL}}"/>
+        {% endfor%}
+    </span>
+</details>
+{% endif %}
+
+{% endfor %}
+
+

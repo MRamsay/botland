@@ -2,13 +2,67 @@ from typing import Pattern
 from django.http.response import HttpResponse
 from django.core.handlers.wsgi import WSGIRequest
 from django.template import loader
-from bots.helpers import RomanNumeral
+
+from astroquery.esa.jwst import Jwst
+from astroquery.mast import Observations
+from astropy.table import Table
+
+import numpy as np
 
 from markdown import markdown
 import re
 
+from bots.helpers import RomanNumeral
+
 # Create your views here.
 NUMBER_OF_CANTOS: int = 34
+
+
+def jwst_index(request: WSGIRequest):
+
+    query = """select distinct top 10 o.proposal_id, o.proposal_title, o.proposal_pi, o.proposal_keywords
+        from 
+            jwst.observation o where o.proposal_pi <> '' and o.proposal_title <> '' and o.proposal_pi <> 'UNKNOWN' and o.proposal_title <> 'UNKNOWN'
+            order by o.proposal_id desc
+        """
+
+    entries: Table = Jwst.launch_job(query, async_job=True).get_results()
+
+    template = loader.get_template('bots/jwst_index.html')
+
+    proposals = list(reversed(sorted(np.unique(entries['proposal_id']))))
+
+    observations = Observations.query_criteria(obs_collection="JWST",
+                                               calib_level=3,
+                                               dataproduct_type='image',
+                                               dataRights='PUBLIC',
+                                               proposal_id=proposals)
+
+    context = {'proposals': []}
+
+    for proposal in proposals:
+
+        relevant_entries = entries[entries['proposal_id'] == proposal]
+        relevant_observations = observations[observations['proposal_id'] ==
+                                             proposal]
+
+        context['proposals'].append({
+            'proposal_id':
+            proposal,
+            'proposal_title':
+            relevant_entries[0]['proposal_title'],
+            'proposal_pi':
+            relevant_entries[0]['proposal_pi'],
+            'proposal_keywords':
+            relevant_entries[0]['proposal_keywords'],
+            'observations': [
+                dict(zip(relevant_observations.columns, row))
+                for row in relevant_observations[
+                    relevant_observations['proposal_id'] == proposal]
+            ]
+        })
+
+    return HttpResponse(template.render(context, request))
 
 
 def canto_index(request: WSGIRequest):
