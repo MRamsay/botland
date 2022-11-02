@@ -1,0 +1,71 @@
+#!/usr/bin/python3
+
+import psycopg2
+import keyring
+
+db_pass = keyring.get_password("database_user", "michael")
+
+params = {
+'dbname' : 'blog',
+'user' : 'michael',
+'host' : 'localhost',
+'password' : db_pass
+}
+connection_string = " ".join([f"{key}='{value}'" for key, value in params.items()])
+
+post_vals = {
+    'title': '',
+    'thumbnail_file': '',
+    'summary_file': '',
+    'post_file': ''
+}
+
+
+connection = psycopg2.connect(connection_string)
+cursor = connection.cursor()
+
+print('connected to database')
+
+for key, value in post_vals.items():
+    post_vals[key] = input(f'select the {key} >> ')
+
+post_sql = f"""
+INSERT INTO posts (post_date, modified_date, title, thumbnail_file, summary_file, post_file)
+VALUES (CURRENT_DATE, CURRENT_DATE, %s, %s, %s, %s) 
+RETURNING id;
+"""
+
+print(post_sql)
+
+cursor.execute(post_sql, list(post_vals.values()))
+connection.commit()
+post_id = cursor.fetchone()[0]
+
+print(f"Post ID is {post_id}")
+
+cursor.execute("SELECT * from TAGS")
+connection.commit()
+tags = cursor.fetchall()
+print("ALL TAGS")
+print("-"*7)
+print(*tags, sep='\n')
+print("-"*7)
+tag_ids = []
+
+getting_tags = True
+while getting_tags:
+
+    tag_id = input("Add a post tag id (hit enter to finish adding tags)")
+    getting_tags = tag_id != ''
+    if getting_tags:
+        tag_ids.append(tag_id)
+
+inserts = [f'({post_id}, {tag})' for tag in tag_ids]
+
+if len(inserts) > 0:
+    post_tag_sql = f"""
+    INSERT INTO POST_TAGS (post_id, tag_id) values {','.join(inserts)};
+    """
+    cursor.execute(post_tag_sql)
+    connection.commit()
+    print(f'Added tags {tag_ids} to the post')

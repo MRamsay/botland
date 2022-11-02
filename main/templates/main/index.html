@@ -3,6 +3,49 @@
 
 <h1>Michael Ramsay's Website</h1>
 
+<h2>About</h2>
+
+<section>
+I'm Michael Ramsay, an astrophysicist and computer scientist by education, and software engineer by trade.
+I'll be documenting interesting things as they appear for me.
+</section>
+
+<h2>Work & Academics</h2>
+
+<h3>Work</h3>
+<p>
+I have several years of experience working as a software engineer for the Department of Physics and Astronomy at the University of Manitoba, if you're interested in that you can check out my thesis below. I've recently become employed by a local company call <a href='https://www.farmlinksolutions.ca/'>FarmLink</a>.
+</p>
+<p>
+I have some marketable skills:
+
+<ul>
+	<li>scientific computing and data analysis</li>
+	<li>full stack web development</li>
+	<li>good math and analytical skills</li>
+	<li>I play well with others</li>
+	<li>good at documenting things</li>
+	<li>haven't crashed the prod server <small><em>as of yet</em></small></li>
+</ul>
+</p>
+<p>
+You can see my resume <a href='assets/pdf/resume.pdf'>here</a>.
+</p>
+<h3>Thesis</h3>
+<p>
+My thesis comprised of adding new features for an online catalogue of supernova remnants, <a href='http://snrcat.physics.umanitoba.ca'>SNRcat</a>.
+I made a series of radio, X-ray, and gamma ray images for each supernova remnant in our Galaxy.
+Along with the images, I did a comprehensive literature study to get detailed brightness values in X-ray for all Galactic supernova remnants, along with many other associated properties. Those brightness values are yet to be published on SNRcat, but when it's made public it should be a great asset for researchers.
+<figure>
+	<img src="{% static 'main/G1.9.jpg' %}" alt="Supernova Remnant G1.9">
+	<figcaption>An example image I made of supernova remnant G1.9, notable for being extremely bright and the smallest shell type remnant in the Galaxy. </figcaption>
+</figure>
+I also made interactive maps of the locations of supernova remnants, and generally improved the website.
+You can see my thesis <a href='assets/pdf/thesis.pdf'>here</a> if you're interested in the details. It looks huge but the meat of it is only around 30 pages and an easy read, the other 470 pages is supplemental material.
+</p>
+
+
+
 <h2>Cool Things</h2>
 
 <h3>Dante's Inferno</h3>
@@ -17,5 +60,17 @@ James Webb data navigation is either watered down press releases, or extremely c
 <br />
 Trying to thread the needle with this one.
 <a href="{% url 'jwst_index' %}">See pics here</a>.
+
+<h3>Blog</h3>
+<a href="{% url 'blog' %}">Sometimes I blog about things</a>.
+
+
+<h2>Anything Else?</h2>
+
+Even though this website is super minimal, it neatly summarizes many years of work and study. At this rate I should have an extra section by 2025.
+</br>
+<img src="{% static 'main/constructionman.gif' %}" alt="A giant construction man toying with a helpless digger. Or a regular sized man playing with a toy. Depends on who's asking.">
+
+
 
 

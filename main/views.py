@@ -16,3 +16,17 @@ def index(request: WSGIRequest):
     template = loader.get_template('main/index.html')
 
     return HttpResponse(template.render({}, request))
+
+
+def blog(request: WSGIRequest):
+
+    template = loader.get_template('main/blog.html')
+
+    return HttpResponse(template.render({}, request))
+
+
+def blog_post(request: WSGIRequest):
+
+    template = loader.get_template('main/blog/index.html')
+
+    return HttpResponse(template.render({}, request))

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mandelbrot Visualisation I - Michael Ramsay</title>
+	<link rel="stylesheet" href="/static/main/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+	<a href='/'>Home</a>
+	<a href='/blog'>Blog</a>
+    </nav>
+
+
+
+<h1>Mandelbrot Visualisation I - Dark Fractals</h1>
+
+<img src='mantis.png'>
+
+<h2>Mandelbrot</h2>
+
+<p>
+I wrote code to make the Mandelbrot set in C using the SDL library. Naturally I got some fun glitches as I messed up the implementation. I only saved one screenshot unfortunately, but I hope you can extrapolate from this simple idea a whole complex variant of this pattern.
+</p>
+
+<img src='0.png'>
+<!--
+<p>
+I'll do a proper writeup soon of the code, but I'd like to get it working with OpenGL first, which I think would speed it up significantly since each pixel has independant processing from one another and would be fairly easy to process in a shader.
+</p>
+-->
+<p>
+I explored around trying to find striking features, and playing with lighting and composition. Due to the self-similarity of the Mandelbrot fractal, you can find variants of some interesting feature that's been rotated and skewed in a way that you find works well compositionally.
+</p>
+<p>
+I had an idea, that the fractal was "dark", in that it had depths, where the farther from the high contrast shore you went, the murkier things got, and that it stretched on and on. As you continued, the murk would begin to obscure the fractal. 
+What lay beyond view?
+I'm afraid the poor writer of Mandel<sup>brot<sub>brot<sub>brot<sup>brot<sub>brot<sub>brot</sub></sub></sup></sub></sub></sup> may have found out.
+</p>
+<p>
+Another was the fear of scale beyond comprehension. There are spiral patterns that you can follow endlessly down. The spiral is made of spirals, each of those spirals composed of spirals, composed of spirals, and it all continues endlessly down, so that you could pick one and follow it to eternity. Despite the scale, there was also the struggle of it all being... meaningless. Of course the Mandelbrot has some fascinating connections to the golden ratio, pi, and even chaos theory, but from a human perspective, what would exploring any of those self-similar spirals even accomplish? Nothing, as far as I can tell. Each looks the same, and is equally endless, and the search equally fruitless. There's endless pattern to be recognized but no enlightenment or understanding comes from it. You, brave adventurer, have seen in the fractal sights noone has ever seen, or will ever see again. It however means nothing.
+</p>
+
+<h2>Image Gallery</h2>
+
+To avoid hurting <s>my</s> your bandwidth, <a href=images.html>click along</a> to see the images I made (took?) of the Mandelbrot set.
+
+
+
+<h2>Mandel<sup>brot<sub>brot<sub>brot<sup>brot<sub>brot<sub>brot</sub></sub></sup></sub></sub></sup></h2>
+   
+<p>
+I've encountered some free time, in which I decided to make something. I would make something, and that something, the something that I made, was a thing that some call a thing that makes the thing called the Mandelbrot set. 
+</p>
+
+<p>
+A program, a program was the something that some call a thing that makes the thing called the Mandelbrot set. This thing was written, and I wrote it.
+I wrote it, this thing, in a language. A language, written by someone, that someone not being me. 
+That language, the language I wrote the thing in, the thing being the thing that makes the thing called the Mandelbrot set, is called C. C, you see, is a language, and a language that was written by someone not me, but by someone else, see?
+I have not written a language, a language to make the thing that makes the thing called the Mandelbrot set, as an example. The example being one example of many of things that the language that I did not make could have made had I made it instead of using the C that was not made by me you see. I also used a library, but not a library with books like the library that you went to when you wanted a book so you went to the library that had the book so that you could get the library book from the library so that you would have the library book that the library had but now you had. This library, not a library with books library but a software library made not of books but out of software, was a software library that helped you write your own software with that software and so the software you could write in a language that you did or did not write was called SDL. That library which I wrote down in this file was not written down in it's source file by me but by someone else, who also wrote it in C you see. Which is to say that I wrote software with software written in a language that I also used and the use that I used it for was to make a thing (a program) that makes the thing called a Mandelbrot set. 
+</p>
+
+<p>
+I like the Mandelbrot set which is a set of numbers. A set of numbers (like the Mandelbrot set) is a collection of numbers which satisfy some criteria. 
+The criteria in the set called the Mandelbrot set is a simple one. The simple criteria for the set called the Mandelbrot set is that you have a point on a plane. The plane which the point is on is the complex plane, and the point is called C, no see not the C that I wrote the thing that made the thing called the Mandelbrot set in, that C is a language that was written not by me but by someone else. This C, the other C and not the previous C, is a point on the plane called the complex plane. 
+You then do an iteration of a value Z. Z is a value, a complex value, and it is iterated on. 
+An iteration is done more than once: you do something. Then you do something. Then you do something. Then you do something. Then you do something. Then you do something. And you continue to do something until the something that you did does something that you wanted the something to do. Then you stop doing the something and do something else. What other something do you do instead of the other something? I don't know, but I'm sure it's something.
+In the case of the set called the Mandelbrot set, the something that you do is you iterate the value Z which starts at <var>0x + 0iy</var> and then you turn Z into <var>Z<sup>2</sup> + C</var> where Z is now
+<var>Z<sup>2</sup> + C</var> instead of <var>0x + 0iy</var>. This something is an iteration, which is actually the first iteration after which you do another iteration where Z becomes <var>Z<sup>2</sup> + C</var> which is a new Z value from the previous Z value which is different from the first Z value of <var>0x + 0iy</var>. Then you do this, the this meaning that last iteration, again.
+This is iteration, and in iteration you do it again. It is something, and you do something. Then you do something. Then you do something. Then you do something. Then you continue the something and stop doing the something for a reason and do something else. The something else is up not to me but to you. I write but did not write C and did not write SDL but I did write this file but that is the something that I do not you. You do the something else and I write the file. Before you do that something else that you do after you did the something at the end of the iteration please continue to read what I write because otherwise what I write won't be read and if it is not read then the something that I did which is writing is now for no thing. The thing I write for is for you to do the something of reading. Anyways, why stop doing the iteration something? You stop the iteration something for two conditions, the two conditions must be met, and if either of the two conditions is not met then you stop doing the something. There is actually one condition, that <var>abs(Z) < 2</var>. That condition is what stops the iteration. If that happens and the iteration stops then the C which is not the language C but the complex point C on the complex plane is not in the set called the Mandelbrot set.
+If the iteration does not stop and instead the something is done. And the something is done. And the something is done. And the something is done to no end, then it's in the Mandelbrot set.
+The other condition which isn't a real condition for a math person but a person who writes in the language C you see is that there is a limit of the number of somethings. The something doing is done. And done. And done. And done. But eventually ends. It ends because we make a limit to the somethings done. We, the writer in the language not of the language and not necessarily of this file, of the thing that makes the thing called the Mandelbrot set, say that there is a limit. 
+There is a limit because a computer can't do a something, then a something, then a something, then a something, over and over and over and over and over with no end. Actually that computer can do somethings to no end but that is another matter and anyways what we want is something. A different something than the other somethings, we want a response from the computer that we write software in a language using other software written in a language a different language or the same language it doesn't matter but in this case the same language C. The response is that after doing a certain amount of somethings (the limit) that we want an answer. The answer is if this point is in the set called the Mandelbrot set. Actually that's a lie becuase if we limit the iterations then how can we be sure that it's in the set? But for us the answer which is not necessarily the exact answer but a sufficient answer is one that we can get after a certain number of iterations. 
+</p>
+
+<p>
+And that is how you make the set called the Mandelbrot set in an abstract way and not necessarily in the way that I did it in the language C and with the library (not the book library but the software library written in C not by me) SDL. In my way of course it looks different. It looks different because while I can write C that is not the language that I use to write this file in. In this file (and not the file I wrote the program in) I write in English which is not C and is in fact not a computer language written by a person but instead a human language written by many people but in fact authored by no one person. 
+</p>
+
+<em>proudly written withot spelcheck over SSH</em>
+
+<!--
+<video autoplay loop muted>
+	<source src="mandelbrot_spin.mp4" type="video/mp4">
+</video>
+-->	
+
+</body>
+</html>
