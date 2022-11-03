@@ -1,6 +1,6 @@
 # Botland - _a misnomer_
 
-[![CI Build](https://github.com/MRamsay/botland/actions/workflows/build.yml/badge.svg)](https://github.com/MRamsay/botland/actions/workflows/build.yml)
+<!-- [![CI Build](https://github.com/MRamsay/botland/actions/workflows/build.yml/badge.svg)](https://github.com/MRamsay/botland/actions/workflows/build.yml) -->
 
 ---
 
